@@ -1,4 +1,4 @@
-<h1 align="center"> Minitalk </h1>
+<h1 align="center">Minitalk</h1>
 
 <div align="center">
 <img src="https://github.com/debsalbornoz/minitalk/assets/119970138/24564ded-dcd2-463f-8527-3e1fa67813d2">
@@ -7,85 +7,100 @@
 <img alt="Static Badge" src="https://img.shields.io/badge/Status-Finished-green">
 </div>
 
-<h2>About </h2>
+<h2>Sobre</h2>
 
 
-Minitalk is a lightweight communication project implemented in C programming language. It demonstrates inter-process communication between a client and a server using the concept of signals (SIGUSR1 and SIGUSR2) for interprocess communication. Signals are potent mechanisms in Unix systems enabling processes to send asynchronous notifications to one another. In the context of this project, these signals are harnessed to represent data bits. The communication is achieved by sending and receiving messages.
- 
-The implemented logic involves bitwise operations to ensure accuracy and reliability in message transmission. Each character of the message is broken down into individual bits and transmitted sequentially from the client to the server.
+O Minitalk é um projeto de comunicação implementado na linguagem de programação C. Ele demonstra a comunicação entre processos entre um cliente e um servidor usando o conceito de sinais para comunicação entre processos. Sinais são mecanismos poderosos em sistemas Unix que permitem que processos enviem notificações assíncronas uns para os outros. No contexto deste projeto, esses sinais são utilizados para representar bits de dados. A comunicação é realizada enviando e recebendo mensagens.
+
+A lógica implementada envolve operações bit a bit para garantir a precisão e confiabilidade na transmissão de mensagens. Cada caractere da mensagem é dividido em bits individuais e transmitido sequencialmente do cliente para o servidor.
 
 
-<h3>Sending Process (Client): </h3>
+
+<h3>Processo de Envio (Cliente):</h3>
 
 
-•Bit Conversion:
+• **Conversão de Bits:**
 
 
-The client converts each character of the message into a sequence of bits.
-Each bit is transmitted as a signal (SIGUSR1 for 0 and SIGUSR2 for 1).
+O cliente converte cada caractere da mensagem em uma sequência de bits. Cada bit é transmitido como um sinal (SIGUSR1 para 0 e SIGUSR2 para 1).
+
+• **Transmissão Assíncrona:**
+
+O cliente envia os bits um a um, aguardando confirmação do servidor após cada bit enviado. Após enviar todos os bits de um caractere, o cliente aguarda confirmação do servidor antes de enviar o próximo caractere.
 
 
-•Asynchronous Transmission:
+
+<h3>Processo de Recebimento (Servidor):</h3>
 
 
-The client sends the bits one by one, awaiting confirmation from the server after each sent bit.
-After sending all bits of a character, the client awaits confirmation from the server before sending the next character.
+• **Recepção de Sinais:**
 
 
-<h3>Receiving Process (Server): </h3>
+
+O servidor aguarda continuamente sinais (SIGUSR1 ou SIGUSR2). Quando um sinal é recebido, o servidor o interpreta como um bit (0 ou 1) do caractere.
 
 
-•Signal Reception:
+• **Construção de Caracteres:**
 
 
-The server continuously waits for signals (SIGUSR1 or SIGUSR2).
-When a signal is received, the server interprets it as a bit (0 or 1) of the character.
-Character Construction:
-
-The server constructs each character by concatenating the received bits.
-When all bits of the character are received, the server displays the character on the standard output.
-Confirmation to Client:
-
-After receiving each bit, the server confirms receipt by sending a signal back to the client.
-The client awaits this confirmation before sending the next bit or character.
-This methodology ensures efficient and reliable communication between the client and server, showcasing the practical application of bitwise operations and signals in Unix-based interprocess communication.
+O servidor constrói cada caractere concatenando os bits recebidos. Quando todos os bits do caractere são recebidos, o servidor exibe o caractere na saída padrão.
 
 
-<h2>How to Use: </h2>
+• **Confirmação para o Cliente:**
 
-To use the Minitalk project for interprocess communication, follow these steps:
 
-•Clone the repository: 
+Após receber cada bit, o servidor confirma o recebimento enviando um sinal de volta ao cliente. O cliente aguarda essa confirmação antes de enviar o próximo bit ou caractere.
+
+Essa metodologia garante uma comunicação eficiente e confiável entre o cliente e o servidor, demonstrando a aplicação prática de operações bit a bit e sinais em comunicação entre processos baseada em Unix.
+
+
+<h2>Como Usar:</h2>
+
+
+Para usar o projeto Minitalk para comunicação entre processos, siga estes passos:
+
+
+• Clone o repositório:
+
+
 ```
 git clone https://github.com/debsalbornoz/minitalk.git
-```
-•Compilation:
-
-Compile the client and serIf you have any questions or suggestions regarding the code, feel free to contact me.ver programs separately using the provided Makefile or by running:
-bash
 
 ```
-gcc -o client client.c
-gcc -o server server.c
-```
 
-•Run the Server:
+<h2>Como Usar:</h2>
 
-Start the server by running the following command in one terminal window:
-bash
-```
-./server
-```
+Para utilizar o projeto Minitalk para comunicação entre processos, siga estes passos:
 
-Note down the server's process ID (PID) displayed upon initialization.
+- Clone o repositório:
+    ```
+    git clone https://github.com/debsalbornoz/minitalk.git
+    ```
 
-•Run the Client:
+- Compilação:
 
-Run the client in another terminal window, specifying the server's PID and the message you want to send:
-bash
-```
-./client [server_PID] [message]
-```
-Replace [server_PID] with the server's PID displayed during initialization, and [message] with the text you want to send.
+    Compile os programas `client` e `server` separadamente usando o Makefile fornecido ou executando:
+    ```bash
+    gcc -o client client.c
+    gcc -o server server.c
+    ```
 
-If you have any questions or suggestions regarding the code, feel free to contact me.
+- **Executar o Servidor:**
+
+    Inicie o servidor executando o seguinte comando em uma janela de terminal:
+    ```bash
+    ./server
+    ```
+
+    Anote o ID do processo (PID) do servidor exibido durante a inicialização.
+
+- **Executar o Cliente:**
+
+    Execute o cliente em outra janela de terminal, especificando o PID do servidor e a mensagem que deseja enviar:
+    ```bash
+    ./client [server_PID] [message]
+    ```
+
+    Substitua `[server_PID]` pelo PID do servidor exibido durante a inicialização e `[message]` pelo texto que você deseja enviar.
+
+Se você tiver alguma dúvida ou sugestão sobre o código, sinta-se à vontade para me contatar.
