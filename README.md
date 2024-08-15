@@ -7,6 +7,17 @@
 <img alt="Static Badge" src="https://img.shields.io/badge/Status-Finished-green">
 </div>
 
+
+
+
+
+
+[minitalk3.webm](https://github.com/user-attachments/assets/488ee1d8-2918-4741-949c-ef5d4b42bf88)
+
+
+
+
+
 <h2>Sobre</h2>
 
 
